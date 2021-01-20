@@ -1,0 +1,104 @@
+<section class="pageSection basePage visible center" id="signIn">
+	<form action="#" method="POST" class="form">
+		<h2 class="form__title"> Connexion </h2>
+		<p class="form__error"></p>
+		<input type="hidden" name="_csrf" value="<%=_csrf%>" class="form__input">
+		<label for="pseudo" class="form__label">Pseudo:</label>
+		<input type="text" class="userForm__input" id="pseudo" name="pseudo">
+		<label for="password" class="form__label">Mot de passe:</label>
+		<input type="password" class="form__input" id="password" name="password">
+		<input type="submit" name="submit" value="Connexion">
+		<a href="#signup">Créer un compte</a>
+		<img class="form__waitImg" src="/images/wait.svg">
+	</form>
+</section>
+
+<section class="pageSection center" id="signup">
+	<form action="#" method="POST" class="form" id="signUpForm">
+			<h2 class="form__title">Creer un compte</h2>
+			<p class="form__error"></p>
+			<input type="hidden" name="_csrf" value="<%=_csrf%>" class="form__input">
+			<div class="inputGroup">
+				<label for="pseudo" class="inputGroup__label">Nom d'utilisateur:</label>
+				<input type="text" class="inputGroup__input" id="pseudo" name="pseudo">
+				<div class="inputGroup__validator" for="pseudo">
+					<p 	class="hideShow inputGroup__validator__criterion"
+						id="pseudoSize"
+						type="size" 
+						min="3" 
+						max="15">
+							Le pseudo doit faire entre 3 et 15 caractères
+					</p>
+					<p 	class="hideShow inputGroup__validator__criterion"
+						id="pseudoForbidden"
+						type="validator"
+						validator="forbidden">
+							Le pseudo ne doit pas contenir de caractères interdits
+					</p>
+					<p 	class="requestValidator inputGroup__validator__criterion"
+						id="pseudoAvailable"
+						type="request"
+						url="/user/userExist"
+						error="err"
+						valide="result"
+						inverted>
+							Le pseudo est disponible
+					</p>
+				</div>
+			</div>
+			<div class="inputGroup">
+				<label for="password" class="inputGroup__label">Mot de passe</label>
+				<input type="password" class="inputGroup__input" id="password" name="password">
+				<div class="inputGroup__validator" for="password">
+					<p 	class="hideShow inputGroup__validator__criterion" 
+						id="passwordLowerCase" 
+						type="validator"
+						validator="lower">
+							Le mot de passe doit contenir une lettre minuscule
+					</p>
+					<p 	class="hideShow inputGroup__validator__criterion" 
+						id="passwordUpperCase" 
+						type="validator"
+						validator="upper">
+							Le mot de passe doit contenir une lettre majuscule
+					</p>
+					<p 	class="hideShow inputGroup__validator__criterion" 
+						id="passwordUpperCase" 
+						type="validator"
+						validator="number">
+							Le mot de passe doit contenir un nombre
+					</p>
+					<p 	class="hideShow inputGroup__validator__criterion"
+						id="passwordSpetial"
+						type="validator"
+						validator="spetial">
+							Le mot de passe doit contenir un caractère spécial
+					</p>
+					<p 	class="hideShow inputGroup__validator__criterion"
+						id="passwordSize" 
+						type="sizemi"
+						min="8">
+							Le mot de passe doit faire plus de 8 caractères
+					</p>
+					<p type="update" update="passwordRepeat"></p>
+				</div>
+			</div>
+			<div class="inputGroup">
+				<label for="" class="inputGroup__label">Répétition du mot de passe:</label>
+				<input type="password" class="inputGroup__input" id="passwordRepeat" name="passwordRepeat">
+				<div class="inputGroup__validator" for="passwordRepeat">
+					<p 	class="hideShow inputGroup__validator__criterion" 
+						id="passwordRepeatOk" 
+						type="match" 
+						with="password">
+							Les mots de passes ne correspondent pas
+					</p>
+				</div>
+			</div>
+			<input type="submit" value="Créer !" class="form__input">
+			<img class="form__waitImg" src="/images/wait.svg">
+		</form>
+</section>
+
+<script type="text/javascript" src="/javascript/signin.js"></script>
+<script type="text/javascript" src="/javascript/signup.js"></script>

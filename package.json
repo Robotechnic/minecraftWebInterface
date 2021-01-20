@@ -1,0 +1,41 @@
+{
+  "name": "minecraftwebinterface",
+  "version": "1.0.0",
+  "description": "Web interface that allow to comunicate with minecraft server",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.4.0",
+    "mariadb": "^2.5.2",
+    "modern-rcon": "^1.0.3",
+    "socket.io": "^3.1.0",
+    "ts-mixer": "^5.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compileScss": "sass sass/pages/:.temp --style compressed",
+    "scss": "nodemon -e scss -x \"npm run compileScss\"",
+    "prefix": "postcss ./.temp/*.css --use autoprefixer -d ./public/css/ --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robotechnic/minecraftWebInterface.git"
+  },
+  "keywords": [
+    "minecraft",
+    "node",
+    "js"
+  ],
+  "author": "Robotechnic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robotechnic/minecraftWebInterface/issues"
+  },
+  "homepage": "https://github.com/Robotechnic/minecraftWebInterface#readme"
+}

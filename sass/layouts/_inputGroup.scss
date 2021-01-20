@@ -1,0 +1,54 @@
+.inputGroup {
+	&__validator {
+		&__criterion{
+			margin:0;
+
+			&.hideShow{
+				display: none;
+				color:red;
+
+				&.error{
+					display:block;
+				}
+			}
+
+			&.requestValidator {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: left;
+				&.valide{
+					color:#26F53C;
+
+					&::before {
+						content:"✔";
+						color:#26F53C;
+					}
+				}
+
+				&.error{
+					color:red;
+
+					&::before {
+						margin-right: 3px;
+						content:"❌";
+						color:red;
+					}
+				}
+
+				&.wait::before {
+						background: url("/images/wait.svg");
+						background-size: cover;
+						content: "";
+						width:30px;
+						height:30px;
+						align-self: center;
+						display: inline-block;
+				}
+			}
+
+
+
+		}
+	}
+}

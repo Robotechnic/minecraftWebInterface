@@ -1,0 +1,42 @@
+@use "../utils/colors" as color;
+
+.form {
+	padding:10px;
+	width: max-content;
+	height: max-content;
+	border-radius:10px;
+	background:color.$formBackground;
+	color:color.$formColors;
+
+	display:flex;
+	flex-direction:column;
+	margin:20px;
+
+	&__title{
+		width: 100%;
+		text-align: center;
+		color:color.$formColors;
+	}
+
+	&__error {
+		margin:0;
+		text-align: center;
+		width:100%;
+		color:red;
+	}
+
+	&__waitImg{
+		display:none;
+	}
+
+	$parent:&;
+
+	&.wait{
+		& *:not(#{$parent}__waitImg){
+			display:none;
+		}
+		#{$parent}__waitImg{
+			display:block;
+		}
+	}
+}

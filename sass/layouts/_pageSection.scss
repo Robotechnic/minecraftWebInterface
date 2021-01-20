@@ -1,0 +1,14 @@
+.pageSection {
+	display:none;
+	&.visible {
+		display:block;
+	}
+
+	&.center {
+		&.visible {
+			display:flex;
+		}
+		align-items: center;
+		justify-content: center;
+	}
+}

@@ -1,0 +1,24 @@
+@use "../utils/colors" as color;
+
+.widgetSelectors {
+	display: flex;
+	flex-direction: column;
+	background: color.$widgetSelectorBackground;
+	height: 100%;
+
+	&__item {
+		color:color.$widgetSelectorColor;
+		padding: 5px;
+		cursor: pointer;
+		text-decoration: none;
+		border-bottom: 4px solid color.$widgetSelectorColor;
+		transition-duration: 1s;
+		text-align: center;
+
+		&:hover {
+			background:lighten(color.$widgetSelectorBackground, 60%);
+			color:color.$widgetSelectorBackground;
+		}
+	}
+
+}

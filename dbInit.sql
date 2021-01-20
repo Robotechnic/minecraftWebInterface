@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS Minecraft CHARACTER SET 'utf8';
+
+CREATE USER IF NOT EXISTS 'minecraft'@'localhost' IDENTIFIED BY 'localPassword';
+
+USE Minecraft;
+
+GRANT SELECT, INSERT, DELETE, UPDATE ON * TO 'minecraft'@'localhost';
+
+
+#user shema
+CREATE TABLE IF NOT EXISTS users (
+	id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	pseudo VARCHAR(15) NOT NULL UNIQUE,
+	password TEXT NOT NULL,
+	permissions SMALLINT NOT NULL DEFAULT 0
+);
+
+#session store shema
+CREATE TABLE IF NOT EXISTS sessions (
+	sid VARCHAR(100) NOT NULL UNIQUE PRIMARY KEY,
+	session TEXT DEFAULT "{}"
+);

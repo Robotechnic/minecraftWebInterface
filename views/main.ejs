@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, min-scale=1.0">
+	<title> Minecraft Control</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+	<header class="header">
+		<h1 class="header__title">Minecraft controller</h1>
+		<nav class="header__infos">
+			<div class="header__infos__items"><%=serverIp%></div>
+			<div class="header__infos__items status">Offline</div>
+			<div class="header__infos__items connectedPlayers">0/0 Players</div>
+		</nav>
+	</header>
+	<% if (connected) {%>
+		<%- include("parts/managePannel.ejs")%>
+	<% }else {%>
+		<%- include("parts/connectPannel.ejs")%>
+	<% }%>
+	<footer class="footer">
+		Fabrique par Robotechnic
+	</footer>
+	<script type="text/javascript" src="/javascript/pageController.js"></script>
+	<script type="text/javascript" src="/javascript/validatorScript.js"></script>
+</body>
+</html>

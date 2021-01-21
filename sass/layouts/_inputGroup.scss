@@ -1,4 +1,7 @@
 .inputGroup {
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
 	&__validator {
 		&__criterion{
 			margin:0;

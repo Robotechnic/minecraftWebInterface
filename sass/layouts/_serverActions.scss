@@ -1,0 +1,23 @@
+@use "../utils/colors" as color;
+
+.serverActions {
+	display:flex;
+	justify-content: space-around;
+	&__button {
+		background:none;
+		border:none;
+		cursor: pointer;
+		color:white;
+		border-radius:10px;
+		display: block;
+
+		@each $name,$color in color.$serverAction{
+			&.#{$name} {
+				background:$color;
+			}
+			&.#{$name}:hover {
+				background:lighten($color,20%);
+			}
+		}
+	}
+}

@@ -1,0 +1,13 @@
+@use "../utils/colors" as color;
+
+a {
+	text-decoration: none;
+	font-weight:bold;
+	color:inherit;
+	color:color.$linkColor;
+	transition-duration: .5s;
+}
+
+a:hover {
+	color:color.$linkHover;
+}

@@ -3,8 +3,15 @@
 @use "../layouts/pageSection";
 @use "../layouts/form";
 @use "../layouts/inputGroup";
-@use "../components/buttons";
 @use "../layouts/widgetSelectors";
+@use "../layouts/consoleView";
+@use "../layouts/playerList";
+@use "../layouts/serverActions";
+
+@use "../components/buttons";
+@use "../components/inputs";
+@use "../components/link";
+
 @use "../utils/colors" as color;
 
 @font-face {
@@ -17,18 +24,30 @@
 	font-style:normal;
 }
 
+* {
+	font-family:Minecraft Regular;
+}
+
 body {
 	border: none;
 	margin:0;
 	padding:0;
-	font-family:Minecraft Regular;
 	background: color.$mainBackground;
-	display:flex;
-	flex-direction: column;
 	min-height: 100vh;
 	position: relative;
+	display:flex;
+	flex-direction: column;
 }
 
 .pageContener{
 	display:flex;
+	flex-grow: 1;
+	height:100%;
+}
+
+.statusDisplay {
+	background:color.$formBackground;
+	padding:20px;
+	border-radius:10px;
+	color:white;
 }

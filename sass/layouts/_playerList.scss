@@ -1,0 +1,48 @@
+@use "../utils/colors" as color;
+
+.playerList {
+	background: color.$inputBackground;
+	color: color.$formColors;
+	border: 1px solid color.$formColors;
+	border: 1px solid color.$inputBorder;
+	padding: 10px;
+	margin:10px;
+	min-width: 200px;
+	height:100%;
+
+	&__title {
+		text-align: center;
+	}
+
+	&__list {
+		list-style-type: none;
+
+		&__item {
+
+
+			&__button {
+				border:none;
+				background:none;
+				border-radius:10px;
+				cursor: pointer;
+
+				img {
+					width: 1em;
+					height: 1em;
+				}
+			}
+		}
+	}
+
+	&__addButton {
+		color:color.$addColor;
+		background:color.$addBackground;
+		margin-left: auto;
+		margin-right: auto;
+
+		&:hover {
+			color:color.$addBackground;
+			background:color.$addColor;
+		}
+	}
+}

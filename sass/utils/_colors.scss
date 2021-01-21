@@ -2,8 +2,25 @@ $mainBackground:#C7D8D7FF;
 $headerFooterBackground:#1E1F1BFF;
 $headerColor:white;
 
-$formBackground:#2D2F29FF;
-$formColors:white;
+$formBackground:#292a2b;
+$formColors:#afafaf;
 
-$widgetSelectorBackground:#2D2F29FF;
+$widgetSelectorBackground:#292a2b;
 $widgetSelectorColor:white;
+
+$consoleBackground:#282923FF;
+$consoleBaseColor:white;
+
+$inputBackground:#222;
+$inputBorder:#1a1a1aff;
+
+$linkColor:white;
+$linkHover:gray;
+
+$addBackground:lime;
+$addColor:white;
+
+$serverAction:(
+	"power":red,
+	"restart":orange
+);

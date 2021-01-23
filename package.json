@@ -10,7 +10,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "helmet": "^4.4.0",
+    "helmet": "^4.4.1",
     "mariadb": "^2.5.2",
     "modern-rcon": "^1.0.3",
     "socket.io": "^3.1.0",

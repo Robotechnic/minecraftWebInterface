@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, min-scale=1.0">
 	<title> Minecraft Control</title>
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="icon" type="image/ico" href="favicon.ico">
 </head>
 <body>
 	<header class="header">
@@ -25,5 +26,9 @@
 	</footer>
 	<script type="text/javascript" src="/javascript/pageController.js"></script>
 	<script type="text/javascript" src="/javascript/validatorScript.js"></script>
+	<% if (connected) { %>
+		<script  src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="/javascript/socket.js"></script>
+	<% } %>
 </body>
 </html>

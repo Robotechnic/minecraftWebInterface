@@ -21,6 +21,7 @@ $addBackground:lime;
 $addColor:white;
 
 $serverAction:(
-	"power":red,
+	"start":lime,
+	"stop":red,
 	"restart":orange
 );

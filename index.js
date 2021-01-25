@@ -51,6 +51,7 @@ const sessionManager = expressSession({
 		secure: process.env.SECURE,
 	}
 })
+
 app.use(sessionManager)
 io.use((socket, next) => {
     sessionManager(socket.request, socket.request.res || {}, next);
@@ -67,8 +68,22 @@ const {csrfToken,csrfParse} = require("./middlewares/csrfToken")
 
 app.use(require("./middlewares/connected"))
 
+//setup minecraft gesture with socket io and routes
+const mineceftFilesLoader = require("./utility/minecraftFileLoader.js")
+var fileManager = new mineceftFilesLoader()
+
+const minecraftServer = require("./utility/serverManager.js")
+var serverManager = new minecraftServer()
+
 app.get("/",csrfToken,(req,res)=>{
-	res.render("main.ejs",{serverIp:process.env.MINECRAFT_IP})
+	fileManager.getLog((log)=>{
+		res.render("main.ejs",{
+			serverIp:process.env.MINECRAFT_IP,
+			maxPlayers:serverManager.maxPlayers,
+			log:serverManager.connected ? log : " "
+		})
+	})
+	
 })
 
 app.post("/",csrfToken,(req,res)=>{
@@ -78,67 +93,60 @@ app.post("/",csrfToken,(req,res)=>{
 app.use("/user",require("./routes/user.js")(db))
 app.use("/minecraft",require("./routes/minecraftConfig.js"))
 
-
-//subprocess creation
-const {spawn} = require("child_process")
-var minecraftServer = undefined
-var sererStatus = "Offline"
-var startedMatch = /\[[0-9:]+\] \[Server thread\/INFO\]: Done/
+initData = (socket) => {
+	//on restart for opened clients
+	socket.emit("statusChanged",serverManager.status)
+	socket.emit("newPlayerAmount",{players:serverManager.playerCount,max:serverManager.maxPlayers})
+}
 
 io.on("connect",(socket)=>{
-
 	socket.on("start",()=>{
-		console.log("Start minecraft server")
-		minecraftServer = spawn("java",["-Xmx"+process.env.MINECRAFT_RAM+"M",
-									  "-Xms"+process.env.MINECRAFT_RAM+"M",
-									  "-jar",
-									  "server.jar",
-									  "nogui"],{
-										cwd:process.env.MINECRAFT_PATH
-									  })
-
-
-		minecraftServer.stdout.on("data", (data) => {
-			if (log.match(startedMatch)){
-				sererStatus = "Online"
-				socket.broadcast.emit("status",sererStatus)
-				socket.emit("status",sererStatus)
-			}
-			socket.broadcast.emit("log",data.toString())
-			socket.emit("log",data.toString())
-			console.log(`${data.toString()}`)
-		})
-
-		minecraftServer.stderr.on("data", (data) => {
-			socket.broadcast.emit("error",data.toString())
-			socket.emit("error",data.toString())
-			console.error(`stderr: ${data.toString()}`)
-		})
-
-		minecraftServer.on("close",(code,signal)=>{
-			sererStatus = "Offline"
-			socket.emit("status",sererStatus)
-			socket.broadcast.emit("status",sererStatus)
-			console.log("close programm",code,signal)
-		})
+		if (serverManager.started)
+			serverManager.stop()
+		else
+			serverManager.start()
 	})
 
 	socket.on("command",command=>{
 		console.log(command)
-		minecraftServer.stdin.write(command)
+		serverManager.command(command)
 	})
 
 	socket.on("stop",()=>{
-		if (minecraftServer){
-			minecraftServer.abort()
-		}
+		serverManager.stop()
 	})
 
+	initData(socket)
+})
+
+initData(io)
+
+serverManager.on("log",(log)=>{
+	io.emit("log",log)
+})
+
+serverManager.on("error",(error)=>{
+	io.emit("error",error)
+})
+
+serverManager.on("statusChanged",(status)=>{
+	io.emit("statusChanged",status)
+})
+
+serverManager.on("newPlayerAmount",(amount)=>{
+	console.log("Player connect/disconnect :",amount)
+	io.emit("newPlayerAmount",{players:amount,max:serverManager.maxPlayers})
 })
 
 
+process.on('SIGINT', function() {
+	serverManager.stop()
+	process.exit();
+});
 
-
+process.on('exit', function () {
+	serverManager.stop()
+});
 
 http.listen(process.env.PORT,()=>{
 	console.log("Le serveur est lancé sur le port ",process.env.PORT)

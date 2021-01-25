@@ -21,9 +21,16 @@
 		&nbsp;
 	</section>
 	<section class="pageSection" id="console">
-		<div class="consoleView">
+		<div class="consoleView offline">
+			<h1 class="consoleView__offline">Server is offline</h1>
 			<div class="consoleView__text consoleOutput" lines="all">
 				&nbsp;
+				<%
+					var logs = log.split("\n")
+					for (var l = 0; l < logs.length; l++) {
+				%>
+					<p class="consoleOutput__log"><%=logs[l]%></p>
+				<% } %>
 			</div>
 			<form class="consoleView__input">
 				<input type="text" name="commande" id="commande" class="consoleView__input__text">

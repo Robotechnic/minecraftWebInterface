@@ -1,5 +1,6 @@
 const socket = io()
 
+//status gesture
 socket.on("connect",(data)=>{
 	console.log("Socket connected")
 })
@@ -29,4 +30,41 @@ document.querySelectorAll(".consoleView__input").forEach((element)=>{
 		event.preventDefault()
 		socket.emit("command",event.target.commande.value)
 	})
+})
+
+
+//infos display gesture
+socket.on("statusChanged",status=>{
+	console.log("New status :",status)
+	document.querySelectorAll(".status").forEach((element)=>{
+		element.innerText = status
+	})
+	document.querySelectorAll(".start,.stop").forEach((element)=>{
+		if (status == "Offline"){
+			element.classList.remove("stop")
+			element.classList.add("start")
+		} else {
+			element.classList.add("stop")
+			element.classList.remove("start")
+		}
+	})
+
+	document.querySelectorAll(".consoleView").forEach((element)=>{
+		if (status == "Online" || status == "Start-up"){
+			element.classList.remove("offline")
+		} else {
+			element.classList.add("offline")
+		}
+	})
+	
+	document.querySelectorAll(".consoleOutput").forEach((element)=>{
+		element.innerHTML = ""
+	})
+})
+
+socket.on("newPlayerAmount",amount=>{
+	console.log("New player amount:",amount)
+	document.querySelectorAll(".connectedPlayers").forEach((element)=>{
+		element.innerText = amount.players + "/" + amount.max + " players"
+	}) 
 })

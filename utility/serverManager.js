@@ -15,7 +15,7 @@ module.exports = class Server extends EventEmitter{
 		this.maxPlayers = maxPlayers
 		this.started = false
 		this.restart = false
-		this.status = "Offline"
+		this.serverStatus = "Offline"
 		this.minecraftServer = undefined
 	}
 

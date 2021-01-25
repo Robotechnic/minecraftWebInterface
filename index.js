@@ -95,7 +95,7 @@ app.use("/minecraft",require("./routes/minecraftConfig.js"))
 
 initData = (socket) => {
 	//on restart for opened clients
-	socket.emit("statusChanged",serverManager.status)
+	socket.emit("statusChanged",serverManager.serverStatus)
 	socket.emit("newPlayerAmount",{players:serverManager.playerCount,max:serverManager.maxPlayers})
 }
 
@@ -115,6 +115,8 @@ io.on("connect",(socket)=>{
 	socket.on("stop",()=>{
 		serverManager.stop()
 	})
+
+	console.log(serverManager)
 
 	initData(socket)
 })

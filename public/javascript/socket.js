@@ -21,6 +21,10 @@ socket.on("log",(text)=>{
 
 document.querySelectorAll(".start").forEach((element)=>{
 	element.addEventListener("click",(event)=>{
+		if (event.sender.classList.contains("start"))
+			document.querySelectorAll(".consoleOutput").forEach((element)=>{
+				element.innerHTML = ""
+			})
 		socket.emit("start")
 	})
 })
@@ -55,10 +59,6 @@ socket.on("statusChanged",status=>{
 		} else {
 			element.classList.add("offline")
 		}
-	})
-	
-	document.querySelectorAll(".consoleOutput").forEach((element)=>{
-		element.innerHTML = ""
 	})
 })
 

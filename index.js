@@ -91,7 +91,7 @@ app.post("/",csrfToken,(req,res)=>{
 })
 
 app.use("/user",require("./routes/user.js")(db))
-app.use("/minecraft",require("./routes/minecraftConfig.js"))
+app.use("/minecraft",require("./routes/minecraftConfig.js")(fileManager))
 
 initData = (socket) => {
 	//on restart for opened clients
@@ -115,8 +115,6 @@ io.on("connect",(socket)=>{
 	socket.on("stop",()=>{
 		serverManager.stop()
 	})
-
-	console.log(serverManager)
 
 	initData(socket)
 })

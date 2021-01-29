@@ -1,6 +1,7 @@
 const fs   = require("fs")
 const https = require("https")
 
+var dataMatch = /([a-z\-.]+)=([A-Za-z0-9 ]+)/
 
 module.exports = class mineceftFilesLoader {
 	constructor(){
@@ -18,6 +19,8 @@ module.exports = class mineceftFilesLoader {
 				list:[]
 			}
 		}
+
+		this.properties = {}
 	}
 
 	getLog(callback){
@@ -118,6 +121,32 @@ module.exports = class mineceftFilesLoader {
 			})
 		}).on("error",(err)=>{
 			callback(err)
+		})
+	}
+
+	stringToType(string){
+		if (string.match(/[0-9]+/))
+			return parseInt(string,10)
+		else if (string.match(/true|false/))
+			return (string==true)
+		else
+			return string
+	}
+
+	getServerProperty(callback){
+		fs.readFile(process.env.MINECRAFT_PATH+"/server.properties",(err,data)=>{
+			if (err)
+				callback(err)
+			else {
+				data.toString().split("\n").forEach((lines)=>{
+					var linesData = lines.match(dataMatch)
+					if (linesData){
+						this.properties[linesData[1]] = this.stringToType(linesData[2])
+					}
+
+				})
+				callback(null,this.properties)
+			}
 		})
 	}
 }

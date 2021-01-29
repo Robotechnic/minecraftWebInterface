@@ -45,4 +45,19 @@
 			background:color.$addColor;
 		}
 	}
+	&__error {
+		display:none;
+	}
+
+	$parent:&;
+
+	&.error {
+		#{$parent}__error {
+			display: block;
+		}
+
+		#{$parent}__list {
+			display:none;
+		}
+	}
 }

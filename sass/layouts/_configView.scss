@@ -1,0 +1,56 @@
+@use "../utils/colors" as color;
+
+.configView {
+	border-radius:10px;
+	min-height:300px;
+	background:color.$paramsBackground;
+	color:color.$paramsBaseColor;
+	padding:10px;
+	display:grid;
+	grid-template-columns:max-content auto;
+
+	&__item {
+		display:flex;
+		align-items: center;
+
+		&__text {
+			align-self:center;
+		}
+
+		&__input {
+			flex-grow: 1;
+
+			&[type="checkbox"]{
+				width:2em;
+			}
+		}
+	}
+
+	&__saveButton {
+		background:#55FF00FF;
+		position: fixed;
+		right:20px;
+		bottom: 120px;
+
+		&.edit {
+			background: red;
+		}
+
+		&.saving {
+			background:lightgrey;
+
+			img {
+				display: none;
+			}
+
+			&::before {
+				background: url("/images/wait.svg");
+				background-size: auto;
+				content: " ";
+				width: 3em;
+				height: 3em;
+				background-size: cover;
+			}
+		}
+	}
+}

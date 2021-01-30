@@ -1,10 +1,13 @@
 <section class="pageContener">
+	<!-- Page toolbar -->
 	<nav class="widgetSelectors">
 		<a class="widgetSelectors__item" href="#status">Status</a>
 		<a class="widgetSelectors__item" href="#console">Console</a>
 		<a class="widgetSelectors__item" href="#configuration">Configuration</a>
 		<a class="widgetSelectors__item" href="#joueurs">Joueurs</a>
 	</nav>
+
+	<!-- Main page -->
 	<section class="pageSection basePage visible center" id="status">
 		<div class="statusDisplay">
 			<h2><%=serverIp%></h2>
@@ -20,6 +23,7 @@
 		</div>
 		&nbsp;
 	</section>
+	<!-- Logs -->
 	<section class="pageSection" id="console">
 		<div class="consoleView offline">
 			<h1 class="consoleView__offline">Server is offline</h1>
@@ -37,9 +41,17 @@
 			</form>
 		</div>
 	</section>
+
+	<!-- Server general parameters -->
 	<section class="pageSection" id="configuration">
-		
+		<nav class="configView">
+			<button class="configView__saveButton round" csrf="<%=_csrf%>">
+				<img src="/images/save.png">
+			</button>
+		</nav>
 	</section>
+
+	<!--Players gesture -->
 	<section class="pageSection center" id="joueurs">
 		<div class="playerList" name="banned-players">
 			<h2 class="playerList__title">Banned players</h2>

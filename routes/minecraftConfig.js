@@ -1,11 +1,12 @@
 const express = require("express")
+const {csrfToken,csrfParse} = require("../middlewares/csrfToken")
 
 
 module.exports = (fileManager) => {
 	var router = express.Router()
 
 
-	router.get("/add/:name/:pseudo",(req,res)=>{
+	router.post("/add/:name/:pseudo",csrfParse,(req,res)=>{
 		if (req.connected)
 			fileManager.addConfigListElement(req.params.name,req.params.pseudo,(err)=>{
 				res.json({err:err})
@@ -14,7 +15,7 @@ module.exports = (fileManager) => {
 			res.redirect("/")
 	})
 
-	router.get("/del/:name/:pseudo",(req,res)=>{
+	router.post("/del/:name/:pseudo",csrfParse,(req,res)=>{
 		if (req.connected)
 			fileManager.deleteConfigListElement(req.params.name,req.params.pseudo,(err)=>{
 				res.json({err:err})
@@ -36,6 +37,10 @@ module.exports = (fileManager) => {
 			else
 				res.json({err:err,property:result})
 		})
+	})
+
+	router.post("/property",csrfParse,(req,res)=>{
+
 	})
 
 	return router

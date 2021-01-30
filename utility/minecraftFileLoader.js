@@ -128,7 +128,7 @@ module.exports = class mineceftFilesLoader {
 		if (string.match(/[0-9]+/))
 			return parseInt(string,10)
 		else if (string.match(/true|false/))
-			return (string==true)
+			return (string=="true")
 		else
 			return string
 	}

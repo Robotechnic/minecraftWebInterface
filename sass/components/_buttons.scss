@@ -8,8 +8,13 @@ button {
 		padding:0;
 		border:none;
 		text-decoration: none;
-		width:2em;
-		height:2em;
+		width:3em;
+		height:3em;
 		cursor:pointer;
+
+		img {
+			height:1.5em;
+			width: 1.5em;
+		}
 	}
 }

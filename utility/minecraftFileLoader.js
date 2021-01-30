@@ -87,7 +87,12 @@ module.exports = class mineceftFilesLoader {
 				console.log("File reading error :",err)
 				callback(err)
 			} else {
-				this.jsonConfigFiles[name].list = JSON.parse(data.toString())
+				try {
+					this.jsonConfigFiles[name].list = JSON.parse(data.toString())
+				} catch(e) {
+					this.jsonConfigFiles[name].list = []
+				}
+				
 
 				callback()
 			}

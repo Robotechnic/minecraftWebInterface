@@ -10,15 +10,17 @@
 	grid-template-columns:max-content auto;
 
 	&__item {
-		display:flex;
-		align-items: center;
 
 		&__text {
 			align-self:center;
+			max-height: 50px;
+			margin-left: 5px;
+			margin-right: 5px;
 		}
 
 		&__input {
 			flex-grow: 1;
+			align-self:center;
 
 			&[type="checkbox"]{
 				width:2em;

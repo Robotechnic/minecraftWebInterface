@@ -52,25 +52,25 @@
 	</section>
 
 	<!--Players gesture -->
-	<section class="pageSection center" id="joueurs">
+	<section class="pageSection center" id="joueurs" csrf="<%=_csrf%>">
 		<div class="playerList" name="banned-players">
 			<h2 class="playerList__title">Banned players</h2>
-			<p class="playerList__error">Erreur réseau</p>
+			<p class="playerList__error">Erreur reseau</p>
 			<ul class="playerList__list">
 			</ul>
 			<button class="playerList__addButton round">+</button>
 		</div>
-		<div class="playerList" name="whitelist">
+		<div class="playerList" name="whitelist" csrf="<%=_csrf%>">
 			<h2 class="playerList__title">Whitelist</h2>
-			<p class="playerList__error">Erreur réseau</p>
+			<p class="playerList__error">Erreur reseau</p>
 			<ul class="playerList__list">
 
 			</ul>
 			<button class="playerList__addButton round">+</button>
 		</div>
-		<div class="playerList" name="ops">
+		<div class="playerList" name="ops" csrf="<%=_csrf%>">
 			<h2 class="playerList__title">Ops</h2>
-			<p class="playerList__error">Erreur réseau</p>
+			<p class="playerList__error">Erreur reseau</p>
 			<ul class="playerList__list">
 
 			</ul>

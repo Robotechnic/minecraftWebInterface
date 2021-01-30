@@ -6,16 +6,18 @@ updatePlayerList = (name) => {
 	requestedLists[name].send()
 }
 
-delPlayerListElement = (name,pseudo) => {
-	requestedLists[name].open("GET",`/minecraft/del/${name}/${pseudo}`)
+delPlayerListElement = (name,pseudo,csrf) => {
+	requestedLists[name].open("POST",`/minecraft/del/${name}/${pseudo}`)
 	requestedLists[name].type = "del"
-	requestedLists[name].send()
+	requestedLists[name].setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	requestedLists[name].send(`_csrf=${csrf}`)
 }
 
-addPlayerListElement = (name,pseudo) => {
-	requestedLists[name].open("GET",`/minecraft/add/${name}/${pseudo}`)
+addPlayerListElement = (name,pseudo,csrf) => {
+	requestedLists[name].open("POST",`/minecraft/add/${name}/${pseudo}`)
 	requestedLists[name].type = "add"
-	requestedLists[name].send()
+	requestedLists[name].setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	requestedLists[name].send(`_csrf=${csrf}`)
 }
 
 

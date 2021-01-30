@@ -40,7 +40,13 @@ module.exports = (fileManager) => {
 	})
 
 	router.post("/property",csrfParse,(req,res)=>{
-
+		if (!req.validToken){
+			res.json({err:"token"})
+		} else {
+			fileManager.setServerProperty(req.body,(err)=>{
+				res.json({err:err})
+			})
+		}
 	})
 
 	return router

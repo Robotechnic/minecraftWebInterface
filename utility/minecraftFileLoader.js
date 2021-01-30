@@ -149,4 +149,28 @@ module.exports = class mineceftFilesLoader {
 			}
 		})
 	}
+
+	setServerProperty(data,callback){
+		this.getServerProperty((err,property)=>{
+			if (err)
+				callback(err)
+			else {
+				var stringData = ""
+				for (var i in data) {
+					if (property[i])
+						property[i] = data[i]
+				}
+				for (var i in property){
+					stringData += `${i}=${property[i]}\n`
+				}
+				fs.writeFile(process.env.MINECRAFT_PATH+"/server.properties",stringData,(err)=>{
+					if (err)
+						callback(err)
+					else
+						callback()
+				})
+			}
+
+		})
+	}
 }

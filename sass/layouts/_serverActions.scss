@@ -1,4 +1,5 @@
 @use "../utils/colors" as color;
+@use "sass:list";
 
 .serverActions {
 	display:flex;
@@ -10,13 +11,17 @@
 		color:white;
 		border-radius:10px;
 		display: block;
+		width: 120px;
+		height: 120px;
 
 		@each $name,$color in color.$serverAction{
 			&.#{$name} {
-				background:$color;
+				background:list.nth($color,1) url(list.nth($color,2));
+				background-size:cover;
 			}
 			&.#{$name}:hover {
-				background:lighten($color,20%);
+				background:lighten(list.nth($color,1) ,20%) url(list.nth($color,2));
+				background-size:cover;
 			}
 		}
 	}

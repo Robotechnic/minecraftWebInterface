@@ -24,7 +24,8 @@ $addBackground:lime;
 $addColor:white;
 
 $serverAction:(
-	"start":lime,
-	"stop":red,
-	"restart":orange
+	"start":(lime,"/images/powerButton.png"),
+	"startUp":(lightgrey,"/images/wait.svg"),
+	"stop":(red,"/images/powerButton.png"),
+	"restart":(orange,"/images/restart.png")
 );

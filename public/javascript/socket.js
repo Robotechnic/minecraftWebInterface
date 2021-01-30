@@ -21,10 +21,13 @@ socket.on("log",(text)=>{
 
 document.querySelectorAll(".start").forEach((element)=>{
 	element.addEventListener("click",(event)=>{
-		if (event.sender.classList.contains("start"))
+		if (event.target.classList.contains("start")){
 			document.querySelectorAll(".consoleOutput").forEach((element)=>{
 				element.innerHTML = ""
 			})
+			event.target.classList.add("startUp")
+			event.target.classList.remove("startUp")
+		}
 		socket.emit("start")
 	})
 })
@@ -43,12 +46,18 @@ socket.on("statusChanged",status=>{
 	document.querySelectorAll(".status").forEach((element)=>{
 		element.innerText = status
 	})
-	document.querySelectorAll(".start,.stop").forEach((element)=>{
+	document.querySelectorAll(".start,.stop,.startUp").forEach((element)=>{
 		if (status == "Offline"){
 			element.classList.remove("stop")
+			element.classList.remove("startUp")
 			element.classList.add("start")
+		} else if (status == "Start-up") {
+			element.classList.remove("stop")
+			element.classList.add("startUp")
+			element.classList.remove("start")
 		} else {
 			element.classList.add("stop")
+			element.classList.remove("startUp")
 			element.classList.remove("start")
 		}
 	})
